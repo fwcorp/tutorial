@@ -1,5 +1,14 @@
+'use strict';
+const aws = require('aws-sdk');
+var s3 = new aws.S3();
 var request = require('request');
 var cheerio = require('cheerio');
+
+var myBucket = 'jikguprice.com';
+var myKey = 'stdcurrency.js';
+var test = '';
+
+exports.handler = (event, context, callback) => {
 
 request.get({url:'https://www.iporter.com/ko/guide/customs-rates'}, function(err, response, body){
     let $ = cheerio.load(body);
@@ -35,6 +44,22 @@ request.get({url:'https://www.iporter.com/ko/guide/customs-rates'}, function(err
     let match = date.match(datereg);
     stdcurrencyinfo.date = match[0] + " ~ " + match[1];
 
-    var tmpdata = 'var stdcurrencyinfo=' + JSON.stringify(stdcurrencyinfo);
-    console.log(tmpdata);
+    var data = 'var stdcurrencyinfo=' + JSON.stringify(stdcurrencyinfo);
+    var params = {Bucket: myBucket, Key : myKey, Body: data};
+    test = data;
+    try {
+        s3.putObject(params, function(err, data){
+            if(err){console.log(err);}
+            else{console.log("successfully written to stdcurrency")};
+        });
+    }catch(e){
+        console.log(e.message);
+    }
 });
+request.on('error', function(err){
+    console.log("error on loading page");
+});
+request.end();
+
+    callback(null, test);
+};
