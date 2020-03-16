@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/fwcorp/experimental#readme",
   "dependencies": {
-    "cheerio": "^1.0.0-rc.3"
+    "cheerio": "^1.0.0-rc.3",
+    "website-scraper": "^4.2.0"
   }
 }
