@@ -13,9 +13,27 @@
         <div class="seperate"></div>
         <button id="changer" type="button" onclick="change()">체인져</button>
         <div class="seperate"></div>
-        <label>AJAX GET</label><br />
-        <textarea id="short">wewewe</textarea><br />
-        <button type="button" onclick="short()">submit</button>
+        <label id="shortlabel">AJAX GET</label><br />
+        <textarea id="short" rows="10" cols="50">wewewe</textarea><br />
+        <button type="button" onclick="ajaxget()">submit</button>
     </body>
     <script src='html5.js'></script>
+    <script>
+        function txtarea(){
+            $("#shortlabel").text($("#short").val());
+        }
+        function ajaxget(){
+            var sendurl = 'https://tinyurl.com/api-create.php?url=' + $("#short").val();
+            $.ajax({
+                type: "GET",
+                url : sendurl,
+                success : function(data){
+                    $('#short').text(data);
+                },
+                error : function(request,status,error){
+                    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                }
+            });
+        }
+    </script>
 </main>

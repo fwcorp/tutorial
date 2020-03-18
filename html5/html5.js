@@ -8,7 +8,3 @@ function change(){
         changeFlag = 0;
     }
 }
-
-function short(){
-    $('#short').text('hello');
-}
