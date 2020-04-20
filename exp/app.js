@@ -13,7 +13,23 @@ const port = 8080
 server.get('/',(req,res)=>res.send('Hello world'))
 server.post('/',(req,res)=>res.send('Post'))
 server.put('/',(req,res)=>res.send('put'))
-server.delete('/',(req,res)=>res.send('delete'))
+server.delete('/',(req,res)=>res.send('delete'))	
+*/
+
+/*
+server.route('/')
+.get((req,res)=>{
+	res.send('get')
+})
+.post((req,res)=>{
+	res.send('post')
+})
+.put((req,res)=>{
+	res.send('put')
+})
+.delete((req,res)=>{
+	res.send('delete')
+})
 */
 
 server.listen(port,()=>console.log('listening'))
