@@ -3,7 +3,7 @@ let server = express()
 const port = 8080
 //1
 // handle parameters with :, localhost:8080/book/whatever > req.params : {"book":"whatever"}
-server.get('/book/:book',(req,res)=>res.send(req.params))
+//server.get('/book/:book',(req,res)=>res.send(req.params))
 
 // static middleware
 //server.use('/pic',express.static('img'))
