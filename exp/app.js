@@ -1,7 +1,7 @@
 let express = require('express')
 let server = express()
 const port = 8080
-//dsdsd
+//1
 // handle parameters with :, localhost:8080/book/whatever > req.params : {"book":"whatever"}
 server.get('/book/:book',(req,res)=>res.send(req.params))
 
