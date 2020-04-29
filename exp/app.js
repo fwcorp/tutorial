@@ -1,13 +1,13 @@
-let express = require('express')
-let server = express()
-const port = 8080
+let express = require("express");
+let server = express();
+const port = 8080;
 // middleware handling, errors, logs
 // handle parameters with :, localhost:8080/book/whatever > req.params : {"book":"whatever"}
 //server.get('/book/:book',(req,res)=>res.send(req.params))
 
 // static middleware
 //server.use('/pic',express.static('img'))
-
+server.use("/pic", express.static("/tmp"));
 // basic rest
 /*
 server.get('/',(req,res)=>res.send('Hello world'))
@@ -32,4 +32,4 @@ server.route('/')
 })
 */
 
-server.listen(port,()=>console.log('listening'))
+server.listen(port, () => console.log("listening"));
