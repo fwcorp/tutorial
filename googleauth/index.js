@@ -1,14 +1,25 @@
 const passport = require("passport");
 const express = require("express");
+const path = require("path");
+//const html = require("html");
 
 const app = express();
 
-app.post("/login", passport.authenticate("github"), function (req, res) {
-  res.redirect("/");
-});
+app.set("view engine", "html");
+
+app.post(
+  "/login",
+  passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/",
+  }),
+  function (req, res) {
+    res.redirect("/");
+  }
+);
 
 app.get("/", (req, res) => {
-  res.send("helloworld");
+  res.sendFile(path.join(__dirname + "/index.html"));
 });
 
 app.listen(8080, () => {
