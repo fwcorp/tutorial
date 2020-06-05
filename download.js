@@ -1,6 +1,7 @@
 // Downloads all the crawlable files of example.com.
 // The files are saved in the same structure as the structure of the website, by using the `bySiteStructure` filenameGenerator.
 // Links to other websites are filtered out by the urlFilter
+//
 const scrape = require('website-scraper');
 const websiteUrl = 'https://docs.expo.io/versions/v36.0.0/react-native/tutorial/';
 
