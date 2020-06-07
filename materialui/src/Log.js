@@ -34,9 +34,26 @@ const useStyles = makeStyles({
   },
 });
 
+let postData = {
+  mood: "good",
+  description: "",
+};
+
 export default function Log() {
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
+
+  // TODO : "clicked" state to change
+  function changeMood(chosen) {
+    if (chosen === 0) {
+      postData.mood = "good";
+    } else if (chosen === 1) {
+      postData.mood = "soso";
+    } else {
+      postData.mood = "bad";
+    }
+    console.log(postData.mood);
+  }
 
   return (
     <Card className={classes.root}>
@@ -54,9 +71,9 @@ export default function Log() {
           aria-label="contained primary button group"
           className={classes.buttongroup}
         >
-          <Button>Good</Button>
-          <Button>Soso</Button>
-          <Button>Angry</Button>
+          <Button onClick={() => changeMood(0)}>Good</Button>
+          <Button onClick={() => changeMood(1)}>Soso</Button>
+          <Button onClick={() => changeMood(2)}>Angry</Button>
         </ButtonGroup>
         <Typography
           className={classes.title}
