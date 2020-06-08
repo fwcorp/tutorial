@@ -72,7 +72,9 @@ export default function Log() {
           className={classes.buttongroup}
         >
           <Button onClick={() => changeMood(0)}>Good</Button>
-          <Button onClick={() => changeMood(1)}>Soso</Button>
+          <Button color="secondary" onClick={() => changeMood(1)}>
+            Soso
+          </Button>
           <Button onClick={() => changeMood(2)}>Angry</Button>
         </ButtonGroup>
         <Typography
@@ -92,7 +94,7 @@ export default function Log() {
         />
       </CardContent>
       <CardActions className={classes.submit}>
-        <Button variant="contained" color="primary">
+        <Button variant="contained" color="primary" fullWidth>
           Submit
         </Button>
       </CardActions>
