@@ -9,3 +9,5 @@ console.log(
     return data == 3;
   })
 );
+
+console.log(array.map((x) => x * 2));

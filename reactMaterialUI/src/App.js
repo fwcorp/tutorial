@@ -1,24 +1,25 @@
-import React from "react";
-import "./App.css";
-import Log from "./Log";
-import Stat from "./Stat";
-import SimpleBottomNavigation from "./SimpleBottomNavigation";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
-const today = new Date().toDateString();
+import React from 'react';
+import logo from './logo.svg';
+import './App.css';
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <h3>{today}</h3>
-        <Switch>
-          <Route path="/" exact component={Log} />
-          <Route path="/stat/" exact component={Stat} />
-        </Switch>
-        <SimpleBottomNavigation />
-      </div>
-    </Router>
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
   );
 }
 
