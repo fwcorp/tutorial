@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import ListItem from "@material-ui/core/ListItem";
@@ -11,7 +11,7 @@ import firebase from "../../firebase";
 
 const db = firebase.firestore();
 
-const moodData = [{ description: "dd", timestamp: 122 }];
+const moodData = [];
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,20 +26,23 @@ const useStyles = makeStyles((theme) => ({
 function renderRow(props) {
   const { data, index, style } = props;
   //console.log(props);
-
-  return (
-    <ListItem button style={style} key={index}>
-      <ListItemAvatar>
-        <Avatar>
-          <ImageIcon />
-        </Avatar>
-      </ListItemAvatar>
-      <ListItemText
-        primary={moodData[0].description}
-        secondary={moodData[0].timestamp}
-      />
-    </ListItem>
-  );
+  if (index < moodData.length) {
+    return (
+      <ListItem button style={style} key={index}>
+        <ListItemAvatar>
+          <Avatar>
+            <ImageIcon />
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText
+          primary={moodData[index].description}
+          secondary={moodData[index].timestamp}
+        />
+      </ListItem>
+    );
+  } else {
+    return <></>;
+  }
 }
 
 renderRow.propTypes = {
@@ -48,6 +51,7 @@ renderRow.propTypes = {
 };
 
 export default function VirtualizedList() {
+  const [didrender, setDidrender] = useState();
   const classes = useStyles();
 
   useEffect(() => {
@@ -66,6 +70,7 @@ export default function VirtualizedList() {
           };
           moodData.push(obj);
         });
+        setDidrender(1);
       });
 
     // db.collection("mood")
@@ -86,11 +91,20 @@ export default function VirtualizedList() {
     //   });
   }, []);
 
-  return (
-    <div className={classes.root}>
-      <FixedSizeList height={400} width={300} itemSize={60} itemCount={200}>
-        {renderRow}
-      </FixedSizeList>
-    </div>
-  );
+  if (moodData.length === 0) {
+    return <h5>Returning data...</h5>;
+  } else {
+    return (
+      <div className={classes.root}>
+        <FixedSizeList
+          height={400}
+          width={300}
+          itemSize={60}
+          itemCount={moodData.length}
+        >
+          {renderRow}
+        </FixedSizeList>
+      </div>
+    );
+  }
 }
