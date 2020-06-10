@@ -1,8 +1,8 @@
 import React from "react";
 import "./App.css";
-import Log from "./Log";
-import Stat from "./Stat";
-import SimpleBottomNavigation from "./SimpleBottomNavigation";
+import Log from "./components/Log/Log";
+import Stat from "./components/Stat/Stat";
+import SimpleBottomNavigation from "./components/SimpleBottomNavigation";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const today = new Date().toDateString();

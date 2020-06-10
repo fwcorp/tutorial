@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -13,17 +13,9 @@ const useStyles = makeStyles({
     minWidth: 400,
     minHeight: 350,
   },
-  bullet: {
-    display: "inline-block",
-    margin: "0 2px",
-    transform: "scale(0.8)",
-  },
   title: {
     fontSize: 14,
     color: "black",
-  },
-  pos: {
-    marginBottom: 12,
   },
   buttongroup: {
     margin: 12,
@@ -34,26 +26,19 @@ const useStyles = makeStyles({
   },
 });
 
-let postData = {
-  mood: "good",
-  description: "",
-};
-
 export default function Log() {
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
+  const [mood, setMood] = useState(0);
+  const [description, setDescription] = useState("");
 
-  // TODO : "clicked" state to change
-  function changeMood(chosen) {
-    if (chosen === 0) {
-      postData.mood = "good";
-    } else if (chosen === 1) {
-      postData.mood = "soso";
-    } else {
-      postData.mood = "bad";
-    }
-    console.log(postData.mood);
-  }
+  const handleClick = (which) => {
+    setMood(which);
+    console.log(which);
+  };
+
+  const handleSubmit = () => {
+    alert(`${mood} ${description}`);
+  };
 
   return (
     <Card className={classes.root}>
@@ -71,11 +56,24 @@ export default function Log() {
           aria-label="contained primary button group"
           className={classes.buttongroup}
         >
-          <Button onClick={() => changeMood(0)}>Good</Button>
-          <Button color="secondary" onClick={() => changeMood(1)}>
+          <Button
+            color={mood === 0 ? "secondary" : "primary"}
+            onClick={() => handleClick(0)}
+          >
+            Good
+          </Button>
+          <Button
+            color={mood === 1 ? "secondary" : "primary"}
+            onClick={() => handleClick(1)}
+          >
             Soso
           </Button>
-          <Button onClick={() => changeMood(2)}>Angry</Button>
+          <Button
+            color={mood === 2 ? "secondary" : "primary"}
+            onClick={() => handleClick(2)}
+          >
+            Angry
+          </Button>
         </ButtonGroup>
         <Typography
           className={classes.title}
@@ -91,10 +89,12 @@ export default function Log() {
           rows={4}
           placeholder="Write Here"
           variant="outlined"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
         />
       </CardContent>
       <CardActions className={classes.submit}>
-        <Button variant="contained" color="primary" fullWidth>
+        <Button variant="contained" color="primary" onClick={handleSubmit}>
           Submit
         </Button>
       </CardActions>
