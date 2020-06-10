@@ -7,6 +7,9 @@ import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
+import firebase from "../../firebase";
+
+const db = firebase.firestore();
 
 const useStyles = makeStyles({
   root: {
@@ -28,7 +31,7 @@ const useStyles = makeStyles({
 
 export default function Log() {
   const classes = useStyles();
-  const [mood, setMood] = useState(0);
+  const [mood, setMood] = useState(-1);
   const [description, setDescription] = useState("");
 
   const handleClick = (which) => {
@@ -37,7 +40,22 @@ export default function Log() {
   };
 
   const handleSubmit = () => {
-    alert(`${mood} ${description}`);
+    if (mood === -1) alert("Select mood!");
+    else {
+      db.collection("mood")
+        .add({
+          mood: mood,
+          description: description,
+          timestamp: Date.now(),
+        })
+        .then(function (docRef) {
+          console.log("Document written with ID: ", docRef.id);
+          alert(`${mood} ${description}`);
+        })
+        .catch(function (error) {
+          console.error("Error adding document: ", error);
+        });
+    }
   };
 
   return (

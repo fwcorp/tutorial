@@ -5,6 +5,8 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import VirtualizedList from "./VirtualizedList";
+import FolderList from "./FolderList";
 
 const useStyles = makeStyles({
   root: {
@@ -42,7 +44,9 @@ export default function Stat() {
 
   return (
     <Card className={classes.root}>
-      <CardContent className={classes.content}></CardContent>
+      <CardContent className={classes.content}>
+        <VirtualizedList />
+      </CardContent>
     </Card>
   );
 }
