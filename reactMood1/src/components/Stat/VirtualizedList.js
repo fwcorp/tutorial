@@ -6,7 +6,9 @@ import ListItemText from "@material-ui/core/ListItemText";
 import { FixedSizeList } from "react-window";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
-import ImageIcon from "@material-ui/icons/Image";
+import SentimentDissatisfiedIcon from "@material-ui/icons/SentimentDissatisfied";
+import SentimentSatisfiedAltIcon from "@material-ui/icons/SentimentSatisfiedAlt";
+import SentimentVeryDissatisfiedIcon from "@material-ui/icons/SentimentVeryDissatisfied";
 import firebase from "../../firebase";
 
 const db = firebase.firestore();
@@ -19,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
     height: 400,
     minwidth: 400,
     maxWidth: 300,
+    marginLeft: 0,
     backgroundColor: theme.palette.background.paper,
   },
 }));
@@ -27,19 +30,49 @@ function renderRow(props) {
   const { data, index, style } = props;
   //console.log(props);
   if (index < moodData.length) {
-    return (
-      <ListItem button style={style} key={index}>
-        <ListItemAvatar>
-          <Avatar>
-            <ImageIcon />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText
-          primary={moodData[index].description}
-          secondary={moodData[index].timestamp}
-        />
-      </ListItem>
-    );
+    if (moodData[index].mood == 0) {
+      return (
+        <ListItem button style={style} key={index}>
+          <ListItemAvatar>
+            <Avatar>
+              <SentimentSatisfiedAltIcon />
+            </Avatar>
+          </ListItemAvatar>
+          <ListItemText
+            primary={moodData[index].description}
+            secondary={new Date(moodData[index].timestamp).toDateString()}
+          />
+        </ListItem>
+      );
+    } else if (moodData[index].mood == 1) {
+      return (
+        <ListItem button style={style} key={index}>
+          <ListItemAvatar>
+            <Avatar>
+              <SentimentDissatisfiedIcon />
+            </Avatar>
+          </ListItemAvatar>
+          <ListItemText
+            primary={moodData[index].description}
+            secondary={new Date(moodData[index].timestamp).toDateString()}
+          />
+        </ListItem>
+      );
+    } else {
+      return (
+        <ListItem button style={style} key={index}>
+          <ListItemAvatar>
+            <Avatar>
+              <SentimentVeryDissatisfiedIcon />
+            </Avatar>
+          </ListItemAvatar>
+          <ListItemText
+            primary={moodData[index].description}
+            secondary={new Date(moodData[index].timestamp).toDateString()}
+          />
+        </ListItem>
+      );
+    }
   } else {
     return <></>;
   }
@@ -99,7 +132,7 @@ export default function VirtualizedList() {
         <FixedSizeList
           height={400}
           width={300}
-          itemSize={60}
+          itemSize={80}
           itemCount={moodData.length}
         >
           {renderRow}

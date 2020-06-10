@@ -50,7 +50,8 @@ export default function Log() {
         })
         .then(function (docRef) {
           console.log("Document written with ID: ", docRef.id);
-          alert(`${mood} ${description}`);
+          alert("added to database");
+          // alert(`${mood} ${description}`);
         })
         .catch(function (error) {
           console.error("Error adding document: ", error);
