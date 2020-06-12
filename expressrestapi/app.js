@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+require('dotenv/config');
 
 // ROUTES
 app.get("/", (req, res) => {
@@ -13,8 +14,9 @@ app.get("/posts", (req, res) => {
 
 // connect to db
 mongoose.connect(
-  "mongodb+srv://okjinhyuk:LEE.sook!93@cluster0-wgipe.mongodb.net/Cluster0?retryWrites=true&w=majority"
-);
+  process.env.DB_CONNECTION, ()=>{
+	console.log('connected to db');
+  });
 
 // start server
 app.listen(3000);
