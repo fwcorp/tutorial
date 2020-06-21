@@ -1,11 +1,14 @@
-function add(n1: number, n2: number) {
-    console.log(typeof number1)
-    return n1 + n2;
+let userInput: unknown;
+let userName: string;
+
+userInput = 5;
+// userName = userInput;
+if (typeof userInput === 'string') {
+    userName = userInput;
 }
 
-const number1 = 5;
-const number2 = 2.8;
+function generateError(message: string, code: number) {
+    throw { message: message, errorCode: code };
+}
 
-const result = add(number1, number2);
-
-console.log(result);
+generateError('Error!', 500);
