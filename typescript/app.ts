@@ -1,14 +1,18 @@
-let userInput: unknown;
-let userName: string;
+const userName = 'Jinhyuk'
 
-userInput = 5;
-// userName = userInput;
-if (typeof userInput === 'string') {
-    userName = userInput;
-}
+console.log(userName);
 
-function generateError(message: string, code: number): never {
-    throw { message: message, errorCode: code };
-}
+// let userInput: unknown;
+// let userName: string;
 
-generateError('Error!', 500);
+// userInput = 5;
+// // userName = userInput;
+// if (typeof userInput === 'string') {
+//     userName = userInput;
+// }
+
+// function generateError(message: string, code: number): never {
+//     throw { message: message, errorCode: code };
+// }
+
+// generateError('Error!', 500);
