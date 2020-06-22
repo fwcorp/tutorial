@@ -1,7 +1,12 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import VehiclePerson from '../api/VehiclePerson';
 
-export default function List({ ownersList }) {
+export interface ListProps {
+    ownersList: VehiclePerson[] | undefined;
+}
+
+export default function List({ ownersList }: ListProps) {
     // const [owners, setOwners] = useState([]);
     // useEffect(() => {
     //     async function loadData() {
@@ -13,7 +18,7 @@ export default function List({ ownersList }) {
     // }, []);
 
     return <div>
-        {ownersList.map((e, index) => (
+        {ownersList?.map((e, index) => (
 
             <div>
                 <Link as={`/${e.vehicle}/${e.ownerName}`} href="/[vehicle]/[person]">
@@ -26,6 +31,6 @@ export default function List({ ownersList }) {
 
 List.getInitialProps = async () => {
     const response = await fetch('http://localhost:4001/vehicles');
-    const ownersList = await response.json();
+    const ownersList: VehiclePerson[] | undefined = await response.json();
     return { ownersList: ownersList }
 }
