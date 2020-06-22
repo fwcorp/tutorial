@@ -19,6 +19,7 @@ export default function Person({ ownersList }) {
         return <div>loading...</div>
     }
 
+
     return <pre>{owners[0]?.details}</pre>
 }
 
