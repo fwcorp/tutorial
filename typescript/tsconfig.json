@@ -62,6 +62,10 @@
   "exclude": [
     "analytics.ts",
     "basic.ts",
-    "functions.ts"
-  ]
+    "functions.ts",
+    "node_modules" // default
+  ],
+  // "include": [
+  //   "src"
+  // ]
 }
