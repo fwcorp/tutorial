@@ -11,7 +11,7 @@ export default function Details() {
         {people.map(e => (
 
             <div>
-                <Link as="/${e.v}/${e.name}" href="/[vehicle]/[person]">
+                <Link as={`/${e.v}/${e.name}`} href="/[vehicle]/[person]">
                     <a>Navigate to {e.name}'s {e.v}</a>
                 </Link>
             </div>

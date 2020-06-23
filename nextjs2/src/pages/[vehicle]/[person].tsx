@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react';
-import VehiclePerson from '../../api/VehiclePerson';
+import VehiclePerson from '../../../api/VehiclePerson';
 import { NextPageContext } from 'next';
 
 export interface PersonProps {

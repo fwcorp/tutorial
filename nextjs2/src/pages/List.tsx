@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import VehiclePerson from '../api/VehiclePerson';
+import VehiclePerson from '../../api/VehiclePerson';
 
 export interface ListProps {
     ownersList: VehiclePerson[] | undefined;
